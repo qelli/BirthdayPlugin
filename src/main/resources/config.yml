@@ -1,0 +1,32 @@
+debug-mode: false
+require-validation: false
+date-formats:
+  - "MM/dd/yyyy"
+  - "MM/dd"
+database-type: sqlite
+happy-birthday-broadcast:
+  enabled: true
+  message:
+    - "&6Happy Birthday, &e%player%&6!"
+    - "&6You are now &e%age%&6 years old!"
+    - "&6Have a great day!"
+  rewards:
+    - "give %player% diamond 64"
+    - "give %player% cake 1"
+    - "give %player% golden_apple 64"
+mysql:
+  host: localhost
+  port: 3306
+  database: dbName
+  username: dbUser
+  password: dbPass
+connection_properties:
+  connection_timeout: 60000
+  idle_timeout: 600000
+  keep_alive_time: 0
+  max_life_time: 1800000
+  minimum_idle: 10
+  maximum_pool_size: 10
+  leak_detection_threshold: 0
+  connection_test_query: "SELECT 1"
+  character_encoding: "utf8"

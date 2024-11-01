@@ -1,0 +1,15 @@
+name: PlayerBirthday
+description: Todo...
+version: ${project.version}
+main: io.github.qelli.PlayerBirthday.PlayerBirthday
+# api-version: 1.13
+depend: [NoteBlockAPI]
+authors: [blithe_kitsune, qelli]
+permissions:
+  qelliplayerbirthday.setbirthday:
+    description: Allows a player to run the /birthday command
+commands:
+  birthday:
+    description: Sets your birthday date
+    usage: /<command>
+    permission: qelliplayerbirthday.setbirthday
