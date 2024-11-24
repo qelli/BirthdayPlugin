@@ -24,7 +24,7 @@ public final class MySQLDatabase extends PooledSQLDatabase {
     public void connect() {
         final HikariConfig hikari = new HikariConfig();
 
-        hikari.setPoolName("xprison-" + POOL_COUNTER.getAndIncrement());
+        hikari.setPoolName("playerbirthday-" + POOL_COUNTER.getAndIncrement());
 
         this.applyCredentials(hikari, credentials, connectionProperties);
         this.applyConnectionProperties(hikari, connectionProperties);

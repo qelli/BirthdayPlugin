@@ -14,6 +14,23 @@ happy-birthday-broadcast:
     - "give %player% diamond 64"
     - "give %player% cake 1"
     - "give %player% golden_apple 64"
+server-timezone:
+  enabled: true
+  timezone: "America/New_York"
+  player-available-timezones:
+    'United States': 'America/New_York'
+    'Peru': 'America/Lima'
+    'Mexico': 'America/Mexico_City'
+    'Chile': 'America/Santiago'
+    'Argentina': 'America/Argentina/Buenos_Aires'
+    'Brazil': 'America/Sao_Paulo'
+    'Colombia': 'America/Bogota'
+    'Ecuador': 'America/Guayaquil'
+    'Venezuela': 'America/Caracas'
+    'Uruguay': 'America/Montevideo'
+    'Paraguay': 'America/Asuncion'
+    'Bolivia': 'America/La_Paz'
+    'Guatemala': 'America/Guatemala'
 mysql:
   host: localhost
   port: 3306

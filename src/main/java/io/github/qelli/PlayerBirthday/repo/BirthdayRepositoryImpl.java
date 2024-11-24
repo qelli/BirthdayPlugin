@@ -11,7 +11,7 @@ import io.github.qelli.PlayerBirthday.database.SQLDatabase;
 
 public class BirthdayRepositoryImpl implements BirthdayRepository {
 
-    private static final String TABLE_NAME = "QellisPlayerBirthday_Birthdays";
+    private static final String TABLE_NAME = "PlayerBirthday_Birthdays";
     private static final String UUID_COLNAME = "UUID";
     private static final String BIRTHDAY_COLNAME = "birthday";
     private static final String IS_ENABLED_COLNAME = "is_enabled";

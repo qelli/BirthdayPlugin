@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import io.github.qelli.PlayerBirthday.PlayerBirthday;
+import io.github.qelli.PlayerBirthday.utils.Constants;
 import io.github.qelli.PlayerBirthday.utils.PlayerUtils;
 
 public class BirthdayCommand implements CommandExecutor {
@@ -27,7 +28,7 @@ public class BirthdayCommand implements CommandExecutor {
             PlayerUtils.sendColoredMessage(sender, plugin.getMessage("invalid_executer"));
             return true;
         }
-        if(!sender.hasPermission("qelliplayerbirthday.setbirthday")) {
+        if(!sender.hasPermission(Constants.COMMAND_PERM) || !sender.hasPermission(Constants.ADMIN_COMMAND_PERM)) {
             PlayerUtils.sendColoredMessage(sender, plugin.getMessage("no_permission"));
             return true;
         }
@@ -36,46 +37,43 @@ public class BirthdayCommand implements CommandExecutor {
             return true;
         }
 
-        // args[0] can be "set" or "disable"
+        Player player = (Player) sender;
+
         switch(args[0].toLowerCase()) {
             case "set":
-                if(args.length != 2) {
+                if(args.length != 2) { // Why tf did I add this?
                     break;
                 }
-                return setBirthday((Player) sender, args[1], "MX");
+                // TODO: Check if player has already set their birthday
+                plugin.getManager().setPlayerBirthday(player, args[1]);
+                break;
             case "enable":
-                return toggleBroadcast((Player) sender, true);
+                plugin.getManager().enablePlayerBirthday(player.getUniqueId());
+                break;
             case "disable":
-                return toggleBroadcast((Player) sender, false);
+                plugin.getManager().disablePlayerBirthday(player.getUniqueId());
+                break;
+            case "view":
+                if(!sender.hasPermission(Constants.ADMIN_COMMAND_PERM)) {
+                    PlayerUtils.sendColoredMessage(sender, plugin.getMessage("no_permission"));
+                    return true;
+                }
+                // TODO: Show player birthday
+                break;
+            case "approve":
+                if(!sender.hasPermission(Constants.ADMIN_COMMAND_PERM)) {
+                    PlayerUtils.sendColoredMessage(sender, plugin.getMessage("no_permission"));
+                    return true;
+                }
+                // TODO: Approve player birthday
+            default:
+                PlayerUtils.sendColoredMessage(sender, plugin.getMessage("invalid_usage") + getUsage());
         }
-        PlayerUtils.sendColoredMessage(sender, plugin.getMessage("invalid_usage") + getUsage());
         return true;
     }
 
     private String getUsage() {
         return "/birthday <set/disable> <" + plugin.getDateFormat() + ">";
-    }
-
-    private boolean setBirthday(Player player, String rawDate, String timezone) {
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat(plugin.getDateFormat());
-            Date date = formatter.parse(rawDate);
-            plugin.getManager().setPlayerBirthday(player.getUniqueId(), date.toString());
-            // date.
-            return true;
-        } catch(Exception e) {
-            // PlayerUtils.sendColoredMessage(sender, plugin.getMessage("invalid_date_format") + getUsage());
-            return false;
-        }
-    }
-
-    private boolean toggleBroadcast(Player player, boolean enable) {
-        if(enable) {
-            plugin.getManager().enablePlayerBirthday(player.getUniqueId());
-        } else {
-            plugin.getManager().disablePlayerBirthday(player.getUniqueId());
-        }
-        return true;
     }
 
 }

@@ -25,11 +25,16 @@ public class CheckPlayerBirthdayOnJoin implements Listener {
 
         Player p = event.getPlayer();
 
+        // Check if player birthday is today
+        // Check if player hasn't been greeted this year
+
         for (String s : this.plugin.getMessages("happy_birthday.message")) {
-            Bukkit.broadcastMessage(s.replace("{player}", p.getName()));
+            Bukkit.broadcastMessage(s.replace("%player%", p.getName()));
         }
 
-        String command = "give " + p.getName() + " cake 1";
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+        for (String cmd : this.plugin.getConfig().getStringList("happy-birthday-broadcast.rewards")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("%player%", p.getName()));
+        }
+
     }
 }
